@@ -11,6 +11,7 @@ let totalPages = 0;
 
 
 
+
 function loadData() {
 
     http.get(`/api/mahsulot?page=${currentPage}&${currentSize}`, function (res) {
@@ -18,12 +19,10 @@ function loadData() {
         tbody.innerHTML = "";
         let txt = "";
         console.log(page);
-        totalElements = page.totalElements;
-        totalPages = page.totalPages;
-        mahsulotSoni.innerHTML = totalPages;
-        sahifaSoni.innerHTML = page.totalPages;
-        joriySahifa.innerHTML = page.number + 1;
+
         if (page && typeof (page) == 'object') {
+            pageSetting(page);
+
             page.content.forEach(m => {
                 txt += `  <tr>
             <td scope="row">${m.id}</td>
@@ -45,23 +44,54 @@ function loadData() {
 }
 
 
+function pageSetting(page) {
+    totalElements = page.totalElements;
+    totalPages = page.totalPages;
+    mahsulotSoni.innerHTML = totalPages;
+    sahifaSoni.innerHTML = page.totalPages;
+    joriySahifa.innerHTML = page.number + 1;
+    let list = document.querySelector("#pagination-list");
+
+    for (let i = 1; i < list.length-1; i++) {
+        list.children.remove(list.children[i]);
+    }
+
+    for (let i = 1; i <= totalPages; i++) {
+        let li = document.createElement('li');
+        li.classList.add('page-item');
+        li.innerHTML = `<a class="page-link" onclick='pageChange(${i})' >${i}</a>`;
+     
+
+        list.insertBefore(li, nextBtn);
+    }
+
+
+}
+
+
+
 function pageChange(target) {
-   if(target === 'next'){
+
+    if (target === 'next') {
         currentPage++;
-   } else if(target === 'back'){
+    } else if (target === 'back') {
         currentPage--;
-   }
+    } else {
+        if(typeof(target)=='number' && 1<= target && target <= totalPages){
+            currentPage = target - 1;
+        }
+    }
 
-   if(currentPage == totalPages-1){
-       nextBtn.classList.add("disabled");
-   } else if(currentPage == 0){
-       backBtn.classList.add("disabled");
-   } else {
-       nextBtn.classList.remove('disabled');
-       backBtn.classList.remove('disabled');
-   }
+    if (currentPage == totalPages - 1) {
+        nextBtn.classList.add("disabled");
+    } else if (currentPage == 0) {
+        backBtn.classList.add("disabled");
+    } else {
+        nextBtn.classList.remove('disabled');
+        backBtn.classList.remove('disabled');
+    }
 
-       
+
 
 
     loadData();
