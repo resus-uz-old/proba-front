@@ -24,7 +24,20 @@
 <body onload="loadData()">
 
 
-    <div class="container m-5 card table-responsive">
+  <div class="container card">
+<div class="card text-left">
+  <img class="card-img-top" src="holder.js/100px180/" alt="">
+  <div class="card-body">
+    <h4 class="card-title">Mahsulotlar</h4>
+    <p class="card-text row">
+      <span class="col-6">Mahsulot soni: <span id="mahsulot-soni">#</span></span>
+      <span class="col-6">Sahifalar soni: <span id="sahifa-soni">#</span></span>
+      
+    </p>
+  </div>
+</div>
+
+    <div class="table-responsive m-1" style="max-height: 700px;">
         <table class="table table-striped table-dark  table-bordered table-inverse ">
             <thead class="thead-inverse">
                 <tr>
@@ -39,14 +52,13 @@
             </tbody>
 
         </table>
-        <p>Mahsulot soni: <span id="mahsulot-soni">#</span></p>
-        <p>Sahifalar soni: <span id="sahifa-soni">#</span></p>
-        <p>Joriy sahifa: <span id="joriy-sahifa">#</span></p>
+      </div>
         
-        <div class="row">
+        
+        <div class="row card p-1">
 
           <div class="form-group row col-12 col-md-4">
-            <label for="size" style="font-size: 24px;" class="col-6">Size:</label>
+            <label for="size" style="font-size: 24px;" class="col-6">Ko'rinish:</label>
             <select onchange="sizeChange(this.value)" class="form-control form-control-lg col-6" name="size" id="size">
               <option value="10">10</option>
               <option value="15">15</option>

@@ -1,7 +1,6 @@
 let tbody = document.querySelector('tbody');
 let mahsulotSoni = document.querySelector('#mahsulot-soni');
 let sahifaSoni = document.querySelector('#sahifa-soni');
-let joriySahifa = document.querySelector('#joriy-sahifa');
 let nextBtn = document.getElementById("next");
 let backBtn = document.getElementById('back');
 let currentPage = 0;
@@ -51,7 +50,6 @@ function pageSetting(page) {
     totalPages = page.totalPages;
     mahsulotSoni.innerHTML = totalElements;
     sahifaSoni.innerHTML = page.totalPages;
-    joriySahifa.innerHTML = page.number + 1;
     let list = document.querySelector("#pagination-list");
 
     // List elementlarini tozalash kerak
